@@ -133,6 +133,6 @@
 				<strong>데이터베이스 오류가 발생했습니다.</strong>
 			</div>
 		</div>
-		<button type="button" class="btn btn-default pull-right" onclick="chatListFunction('today');">추가</button>
+		<button type="button" class="btn btn-default pull-right" onclick="chatListFunction('ten');">추가</button>
 </body>
 </html>

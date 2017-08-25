@@ -79,4 +79,13 @@ ref. https://www.youtube.com/playlist?list=PLRx0vPvlEmdAVcSdYgqjJ64A7ggHhorU_
 	- chatContent에 enter를 입력해도 값이 출력될 수 있게
 	- 시간의 형태를 일반적인 방법 ( 더 형식적으로 바꿈 ) 
 	- 이름의 길이를 8자로 제
+	
+# 6강 JSP Ajax 실시간 익명 채팅 사이트 개발하기 - 최신 메시지 불러오기
 
+- 매개변수 조정을 통해 효과적인 접근 
+- 데이터베이스 새로만듬
+- 추가된 애트리뷰트를 chat 클래스에도 추가 
+- dao 쿼리문 수정
+- 서블릿 메소드 추가하여 수
+
+- - -

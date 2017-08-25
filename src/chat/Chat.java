@@ -1,7 +1,8 @@
 package chat;
 
 public class Chat {
-
+	
+	int chatID;
 	String chatName;
 	String chatContent;
 	String chatTime;
@@ -23,6 +24,13 @@ public class Chat {
 	public void setChatTime(String chatTime) {
 		this.chatTime = chatTime;
 	}
+	public int getChatID() {
+		return chatID;
+	}
+	public void setChatID(int chatID) {
+		this.chatID = chatID;
+	}
+	
 	
 	
 }

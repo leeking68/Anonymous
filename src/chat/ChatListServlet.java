@@ -21,7 +21,8 @@ public class ChatListServlet extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		String listType = request.getParameter("listType");
 		if(listType == null || listType.equals("")) response.getWriter().write("");
-		else if(listType.endsWith("today")) response.getWriter().write(getToday());
+		else if(listType.equals("today")) response.getWriter().write(getToday());
+		else if(listType.equals("ten")) response.getWriter().write(getTen());
 	}
 	
 	public String getToday() {
@@ -29,6 +30,22 @@ public class ChatListServlet extends HttpServlet {
 		result.append("{\"result\":[");
 		Dao dao = new Dao();
 		ArrayList<Chat> chatList = dao.getChatList(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+		for(int i = 0; i < chatList.size(); i++) {
+			result.append("[{\"value\": \"" + chatList.get(i).getChatName() + "\"},");
+			result.append("{\"value\": \"" + chatList.get(i).getChatContent() + "\"},");
+			result.append("{\"value\": \"" + chatList.get(i).getChatTime() + "\"}]");
+			if(i != chatList.size() -1) result.append(",");
+		}
+		result.append("]}");
+		System.out.println("dad"+result.toString());
+		return result.toString();
+	}
+	
+	public String getTen() {
+		StringBuffer result = new StringBuffer("");
+		result.append("{\"result\":[");
+		Dao dao = new Dao();
+		ArrayList<Chat> chatList = dao.getChatListByRecent(10);
 		for(int i = 0; i < chatList.size(); i++) {
 			result.append("[{\"value\": \"" + chatList.get(i).getChatName() + "\"},");
 			result.append("{\"value\": \"" + chatList.get(i).getChatContent() + "\"},");
