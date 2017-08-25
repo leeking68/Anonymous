@@ -70,4 +70,13 @@ ref. https://www.youtube.com/playlist?list=PLRx0vPvlEmdAVcSdYgqjJ64A7ggHhorU_
 	- addChat()은 뷰에 내용이 출력되는 부분을 json형식으로 바꿔준다 (ref : addChat()의 실제코드 참조)
 - 이전 버전의 문제인 데이터베이스에 데이터가 한번에 두개씩 들어온것 해결
 	- 원인 : 오류체크를 위해 System.out.print(dao.~) 을 남겨두었던것이 원인 -> 삭제 후 원상복구
+	
+- - -
+
+# 5강 JSP Ajax 실시간 익명 채팅 사이트 개발하기 - 개발한 내용 중간 점검하기
+
+- 보완 작업 진행 
+	- chatContent에 enter를 입력해도 값이 출력될 수 있게
+	- 시간의 형태를 일반적인 방법 ( 더 형식적으로 바꿈 ) 
+	- 이름의 길이를 8자로 제
 

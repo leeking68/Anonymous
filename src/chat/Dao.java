@@ -35,13 +35,21 @@ public class Dao {
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, nowTime);
 			rs = pstmt.executeQuery();
+
 			chatList = new ArrayList<Chat>();
 
 			while (rs.next()) {
 				Chat chat = new Chat();
+				System.out.println("aaa"+nowTime);
 				chat.setChatName(rs.getString("chatName"));
-				chat.setChatContent(rs.getString("chatContent"));
-				chat.setChatTime(rs.getString("chatTime"));
+				chat.setChatContent(rs.getString("chatContent").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt;").replaceAll("\n", "<br>"));
+				int chatTime = Integer.parseInt(rs.getString("chatTime").substring(11,13));
+				String timeType = "오전";
+				if(Integer.parseInt(rs.getString("chatTime").substring(11, 13)) >= 12) {
+					timeType = "오후";
+					chatTime -= 12;
+				}
+				chat.setChatTime(rs.getString("chatTime").substring(0, 11)+" "+ timeType + " " + chatTime + ":" + rs.getString("chatTime").substring(14,16)+" ");
 				chatList.add(chat);
 			}
 
@@ -56,6 +64,9 @@ public class Dao {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}
+		for(int i = 0; i < chatList.size(); i++) {
+			System.out.println(i + " :" + chatList.get(i).getChatName());
 		}
 		return chatList;
 	}

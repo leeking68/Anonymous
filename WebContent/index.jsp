@@ -105,7 +105,7 @@
 						<div class="portlet-footer">
 							<div class="row">
 								<div class="form-group col-xs-4">
-									<input style="height: 40px;" type="text" id="chatName" class="form-control" placeholder="이름" maxlength="20">
+									<input style="height: 40px;" type="text" id="chatName" class="form-control" placeholder="이름" maxlength="8">
 								</div>
 							</div>
 							<div class="row" style="height: 90px">
