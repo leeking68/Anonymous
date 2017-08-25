@@ -23,7 +23,6 @@ public class ChatSubmitServlet extends HttpServlet {
 		if (chatName == null || chatName.equals("") || chatContent == null || chatContent.equals("")) {
 			response.getWriter().write("0");
 		} else { 
-			System.out.println("서블릿 데이터값"+new Dao().submit(chatName, chatContent));
 			response.getWriter().write(new Dao().submit(chatName, chatContent));
 		}  
 

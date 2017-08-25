@@ -2,7 +2,7 @@
 
 ref. https://www.youtube.com/playlist?list=PLRx0vPvlEmdAVcSdYgqjJ64A7ggHhorU_
 
-## 1강 - JSP Ajax 실시간 익명 채팅 사이트 개발하기 1강 - 프로젝트 소개 및 화면 디자인
+## 1강 - JSP Ajax 실시간 익명 채팅 사이트 개발하기 - 프로젝트 소개 및 화면 디자인
 
 - dynamic web 프로젝트 생성
 - index.jsp 파일 생성
@@ -11,7 +11,7 @@ ref. https://www.youtube.com/playlist?list=PLRx0vPvlEmdAVcSdYgqjJ64A7ggHhorU_
 - 기본적인 화면 생성 ( 레이아웃 배치 )
 - - -
 
-## 2강 - JSP Ajax 실시간 익명 채팅 사이트 개발하기 2강 - 데이터베이스 설계 및 구축
+## 2강 - JSP Ajax 실시간 익명 채팅 사이트 개발하기 - 데이터베이스 설계 및 구축
 
 - 데이터 베이스 구축 및 연결과정 진행 
 - DAO , DTO 생성 
@@ -42,13 +42,32 @@ ref. https://www.youtube.com/playlist?list=PLRx0vPvlEmdAVcSdYgqjJ64A7ggHhorU_
 	- reloadable = "true"를 "fasle"로 변경 
 		<Context docBase="프로젝트명"
 			path="/프로젝트명"
-			reloadable="true"   
+			reloadable="true"->"false"   
 			source=""~/>
 - Establishing SSL connection without server's identity verification is not recommended. According to MySQL 5.5.45+,~
 	- "jdbc:mysql://localhost:3306/ANONYMOUSCHAT"; 
 	-  위의 dbURL 뒤에 ?autoReconnect=true&useSSL=false 추가 
 	- "jdbc:mysql://localhost:3306/ANONYMOUSCHAT?autoReconnect=true&useSSL=false";
 	
-
-	
 - - -
+
+# 4강 - JSP Ajax 실시간 익명 채팅 사이트 개발하기 - 등록된 메시지 목록 출력하기
+
+- sql 파일에는 테스트 구문이 들어있다. 화면에 추가버튼을 누르면 database의 자료들이 출력된다.
+- ajax를 이용해 통신을 구현한다. 
+- ajax로 실시간 메시지를 확인할 수 있는 기능을 만든다. 
+- 메시지를 실시간으로 조회할 수 있는 기능을 만들면서 서블릿을 추가하고 web.xml에 매핑한다. 
+	-주의 : 하나의 서블릿에 하나의 url - pattern이 매핑된다.
+- 출력 형태는 JSON형태
+	- json형식으로 파싱
+	- 문법주의 할것 
+- ajax로 만들어진 chatListFunction() , addChat 볼것
+	- 1차적으로 chatListFunctio()이 이벤트로 발생하게 되면 서블릿을 통해 데이터를 받아온다.
+	- JSON형태로 파싱한다. 받아온 타입(여기서는 리스트타입)의 사이즈 만큼 출력해준다.
+	- 출력하는 것은 리스트의 인덱스마다 addChat()에 추가하여 출력한다. 
+	- addChat(result[i][0].value, result[i][1].value, result[i][2].value);
+	- 위의 구문의 객체의 수가 3개인것은 현재 데이터의 종류가 3개 ( 이름 , 내용 , 시간)이기 때문이다.
+	- addChat()은 뷰에 내용이 출력되는 부분을 json형식으로 바꿔준다 (ref : addChat()의 실제코드 참조)
+- 이전 버전의 문제인 데이터베이스에 데이터가 한번에 두개씩 들어온것 해결
+	- 원인 : 오류체크를 위해 System.out.print(dao.~) 을 남겨두었던것이 원인 -> 삭제 후 원상복구
+
