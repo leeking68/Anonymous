@@ -10,7 +10,8 @@
 <title>JSP AJAX 실시간 익명 채팅 사이</title>
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
-<script type="text/javascript">
+<script type="text/javascript">	
+	var lastID = 0;
 	function submitFunction(){
 		var chatName = $('#chatName').val();
 		var chatContent = $('#chatContent').val();
@@ -18,8 +19,8 @@
 			type: "POST",
 			url: "./chatSubmitServlet",
 			data: {
-				chatName: chatName,
-				chatContent: chatContent
+				chatName: encodeURIComponent(chatName),
+				chatContent: encodeURIComponent(chatContent)
 			},
 			success: function(result) {
 				console.log(result)
@@ -48,13 +49,15 @@
 				listType: type,
 			},
 			success: function(data) {
+				if(data == "") return;
 				var parsed = JSON.parse(data);
 				var result = parsed.result;
 				console.log(data)
-
 				for(var i = 0; i < result.length; i++) {
 					addChat(result[i][0].value, result[i][1].value, result[i][2].value);
 				}
+				lastID = Number(parsed.last);
+				console.log(lastID);
 			}
 		});
 	}
@@ -80,7 +83,13 @@
 				'</div>'+
 				'</div>'+
 				'<hr>');
+		$('#chatList').scrollTop($('#chatList')[0].scrollHeight);
 	} 
+	function getInfiniteChat() {
+		setInterval(function() {
+			chatListFunction(lastID);
+		}, 1000);
+	}
 	</script>
 </head>
 <body>
@@ -99,7 +108,7 @@
 						</div>
 						<div id="chat" class="panel-collapse collapse in">
 							<div id="chatList" class="portlet-body char-widget"
-								style="overflow-y: auto; width: auto; height: 300px;">
+								style="overflow-y: auto; width: auto; height: 600px;">
 							</div>
 						</div>
 						<div class="portlet-footer">
@@ -133,6 +142,11 @@
 				<strong>데이터베이스 오류가 발생했습니다.</strong>
 			</div>
 		</div>
-		<button type="button" class="btn btn-default pull-right" onclick="chatListFunction('ten');">추가</button>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				chatListFunction('ten');
+				getInfiniteChat();
+			});
+		</script>
 </body>
 </html>
